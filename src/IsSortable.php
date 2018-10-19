@@ -18,6 +18,11 @@ trait IsSorted
         if (!$orderBy = array_get((new static::$model)->sortable, 'order_column_name')) {
             return $query;
         }
+
+        // Remove all other sort orders
+        $query->getQuery()->orders = [];
+
+        // Apply our desired order
         return $query->orderBy($orderBy, 'ASC');
     }
 }
