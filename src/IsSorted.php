@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaFieldSortable;
 
+use Illuminate\Support\Arr;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 trait IsSorted
@@ -15,7 +16,7 @@ trait IsSorted
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if (!$orderBy = array_get((new static::$model)->sortable, 'order_column_name')) {
+        if (!$orderBy = Arr::get((new static::$model)->sortable, 'order_column_name')) {
             return $query;
         }
 
